@@ -2,9 +2,9 @@
 // Воспользуйтесь методом перебора делителей числа.
 
 function testCycle(n) {
-    var x="";
-    var i=2;
-    var j=0;
+    let x="";
+    let i=2;
+    let j=0;
     while(i*i <= n & j != 1 & n != 0){
         while(n % i === 0){
             j=1;
