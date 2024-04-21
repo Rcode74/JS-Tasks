@@ -1,0 +1,17 @@
+// Дано число n (n > 1). Выведите строку, состоящую из простых чисел, меньших n. Воспользуйтесь решетом Эратосфена. Единицу не считаем простым числом.
+
+function testCycle(n) {
+    const save = [];
+    const primes = [];
+    
+    for (let i = 2; i < n; i++) {
+        if (!save[i]) {
+            primes.push(i);
+            for (let j = i * i; j < n; j += i) {	// i*2 было сначала, но на i = быстрей
+                save[j] = true;
+            }
+        }
+    }
+    
+    return primes.join(' ');
+}
