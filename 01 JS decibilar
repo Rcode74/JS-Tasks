@@ -2,6 +2,8 @@
 // Показать эти числа.
 
 
+
+
 function decibilar(n) {
     let numbers = Array.from(String(n)).map(i=>Number(i)) 	// переводит число в строку и в массив чисел из строки
     const maxNumbers = Math.max(...numbers);		 	// находит максимальное число в массиве	
@@ -10,16 +12,22 @@ function decibilar(n) {
     let i = 0;
     let firstArray = 0;
     let lengthTemp = length -1;    // 4
-   
+
+
+
+
     while(i < maxNumbers) {                //генерирует в массиве нужное количество массивов для вывода в них
         myArray[i] = [];
         i++;
     }
-    
+
+
     while(firstArray <= maxNumbers -1) {    //пока 0 (первое число) меньше 5-1 (длина числа - 1(длина индекса)) то
-        
+
+
         while(0 <= lengthTemp) {            // пока 0 меньше кол-ва индексов массива (4) то
-            
+
+
             if(0 < numbers[lengthTemp]) {        // если 0 меньше числа в 4 индексе в массиве [3,7,1,5,[8]]
                myArray[firstArray][lengthTemp] = 1;
                numbers[lengthTemp] --;   //убавили на 1 внутри временного массива число (вышло 0,0,0,0,1)
@@ -29,17 +37,27 @@ function decibilar(n) {
             
            lengthTemp --;    //убавили до -1  
         }
-        
+
+
         firstArray ++;
         lengthTemp = length -1;
     }
-    
+
+
+
+
     i = 0;
+
+
+
 
     while(i < maxNumbers) {
         myArray[i] = myArray[i].join('').replace(/^0+/, '');
         i ++;
     }
+
+
+
 
     return 'Минимальное количество децибилярных чисел: ' + maxNumbers + 
         '\nВот они: ' + myArray.join(', ');
