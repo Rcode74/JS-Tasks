@@ -1,0 +1,13 @@
+// Дано число n (n > 1). Верните из функции n-ное число Фибоначчи
+
+function testCycle(n) {
+    let i = 1;
+    let a = 0, b = 1, c;
+    while ( i < n) {
+        c = a + b;
+        a = b;
+        b = c;
+        i++;
+    }
+    return c;
+}
