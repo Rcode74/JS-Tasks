@@ -1,0 +1,111 @@
+// В этом задании в функцию testArray передаются два массива случайной длины заполненные случайными числами. 
+// Нужно сосчитать сумму всех элементов обоих массивов и возвратить ее из функции.
+// Sample Input:
+// [0, 1, 5, 3]  [3]
+// Sample Output:
+// 12
+
+
+
+
+function testArray(a, b) {
+    var x = 0; 
+    a = a.concat(b);
+    for(let i = 0; i < a.length; i++){
+        x += a[i];
+    }
+    return x
+}
+
+
+
+
+// В этом задании в функцию testArray передаются две строки случайной длины и содержания. Нужно составить из символов этих строк один массив 
+// (каждый символ строки становится отдельным элементом массива), затем добавить первым элементом  массива текстовое значение "Иванов", и вернуть 
+// из функции все элементы в обратном порядке, преобразовав в строку. Обратите внимание, что в обратном порядке нужно переставить элементы внутри массива, 
+// а данные внутри элементов инвертировать не нужно!
+// Sample Input:
+// 4326 297515
+// Sample Output:
+// 5157926234Иванов
+
+
+
+
+function testArray(a, b) {
+    aLength = a.length;			
+    bLength = b.length;		
+    let temporary = 0;			
+    let myArrayA = new Array();		
+    while (temporary < aLength){	
+        myArrayA[temporary] = a.charAt(temporary) // 
+        temporary += 1			
+    }
+    temporary = 0;
+    let temporary2 = myArrayA.unshift()	
+    while (temporary < bLength){	
+        myArrayA[temporary2] = b.charAt(temporary)	
+        temporary += 1			
+        temporary2 += 1			
+    }
+    myArrayA.unshift('Иванов');		
+    myArrayA.reverse();			
+    return myArrayA.join('');
+}
+
+
+
+
+// В этом задании в функцию testDateTime передаются две строки вида "03 November 2017 04:17".
+// Нужно превратить строки в даты, сравнить их. Для той, что больше получить день недели и вернуть его из функции.
+// Название дня недели должно быть по-русски, с большой буквы, например: "Понедельник".
+// Sample Input 1:
+// 04 April 1909 17:29
+// 21 July 1909 09:13
+// Sample Output 1:
+// Среда
+
+
+
+
+function testDateTime(a, b) {
+    let myDate1 = new Date(a);
+    let myDate2 = new Date(b);
+    let week = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+
+    if (myDate1 > myDate2)
+        return week[myDate1.getDay()];
+    else
+        return week[myDate2.getDay()];
+}
+
+
+
+
+// В этом задании в функцию testRegExp первым параметром передается случайная строка(переменная s), а вторым - случайная подстрока(переменная sub_s), 
+// которую нужно использовать в качестве шаблона регулярного выражения. Нужно вернуть из функции строку, в которой будут перечислены через запятую все 
+// совпадения шаблона с первой строкой.
+// Sample Input 1:
+// Andsirdaarrevarariarewbutovearrmararan
+// ar
+// Sample Output 1:
+// ar,ar,ar,ar,ar,ar,ar
+
+
+
+
+function testRegExp(s, sub_s) {
+    let myPattern = new RegExp(sub_s,'g');
+    let a = 0;
+
+
+    while (myPattern.test(s) === true) {
+        a++
+    }
+
+
+    b = sub_s + ',';
+    c = b.repeat(a-1);
+    d = c + sub_s;
+    return d;
+}
