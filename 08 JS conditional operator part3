@@ -1,0 +1,189 @@
+/* TASK 14 Мороженое
+В кафе мороженое продают по три шарика и по пять шариков. Можно ли купить ровно k шариков мороженого?
+Входные данные: Вводится число k (целое, положительное)
+Выходные данные: Программа должна вывести слово YES, если при таких условиях можно набрать ровно k шариков (не больше и не меньше), в противном случае - вывести NO.
+Sample Input 1: 3 Sample Output 1: YES Sample Input 2: 1 Sample Output 2: NO */
+
+
+//var 1
+let k = Number(prompt())
+let x = 1
+if (k % 3 != 0 || k % 5 != 0) {
+    while (x != 0 & k > 0) {
+        x = k % 5
+        k -= 3
+    }
+}
+
+if (x === 0 || k % 3 === 0 || k % 5 === 0){
+    console.log('YES')
+}else
+    console.log('NO')
+
+
+//var 2
+let k = Number(prompt())
+x = (k / 1 === 1) + (k / 2 === 1) + (k / 4 === 1) + (k / 7 === 1)
+console.log(['YES', 'NO'][x])
+
+
+//var 3
+let k = Number(prompt())
+console.log((k < 3 || k === 4 || k === 7) ? 'NO' : 'YES'); 
+
+
+//var 4
+let k = Number(prompt())
+console.log([,1,2,,4,,,7][k] ? 'NO' : 'YES')
+
+
+
+
+/* TASK 15 Котлеты
+На сковородку одновременно можно положить k котлет. Каждую котлету нужно с каждой стороны обжаривать m минут непрерывно. 
+За какое наименьшее время удастся поджарить с обеих сторон n котлет? Входные данные: Вводятся 3 числа: k, m и n. Все числа не превосходят 32000.
+Выходные данные: Вывести время, за которое все котлеты будут обжарены. Sample Input: 1 5 1 Sample Output: 10 */
+
+
+let [k, m, n] = [...Array(3)].map(prompt).map(Number)
+let iter = n * 2
+let sumIter = Math.ceil(iter / k)
+let answer = sumIter * m
+if (sumIter = 1){
+    console.log(2 * m)
+}else
+    console.log(answer)
+
+
+
+
+/* TASK 16 Координатные четверти
+Даны координаты двух точек на плоскости, требуется определить, лежат ли они в одной координатной четверти или нет (все координаты отличны от нуля).
+Входные данные: Вводятся 4 числа: координаты первой точки (x1, y1) и координаты второй точки (x2, y2).
+Выходные данные: Программа должна вывести слово YES, если точки находятся в одной координатной четверти, в противном случае вывести слово NO. */
+
+
+//var 1
+let [x1, y1, x2, y2] = [...Array(4)].map(prompt).map(Number)
+if (x1 > 0 & x2 > 0 & y1 > 0 & y2 > 0 ||
+    x1 > 0 & x2 > 0 & y1 < 0 & y2 < 0 ||
+    x1 < 0 & x2 < 0 & y1 > 0 & y2 > 0 ||
+    x1 < 0 & x2 < 0 & y1 < 0 & y2 < 0) {
+    console.log ('YES')
+}else
+    console.log('NO')
+
+
+//var 2
+let [x1, y1, x2, y2] = [...Array(4)].map(prompt).map(Number)
+console.log(x1 * x2 > 0 & y1 * y2 > 0 ? 'YES' : 'NO')
+
+
+
+
+/* TASK 17 Существует ли треугольник?
+Входные данные :Даны три натуральных числа a, b, c, записанные в отдельных строках. Определите, существует ли невырожденный треугольник с такими сторонами.
+Выходные данные: Если треугольник существует, выведите строку YES, иначе выведите строку NO. */
+
+
+let a = prompt(); let b = prompt(); let c = prompt()
+a = +(a); b = +(b); c = +(c)
+console.log(a + b > c & a + c > b & b + c > a ? 'YES' : 'NO')  //var 1
+console.log( (a < (b + c)) === (b < (a + c)) === (c < (a + b)) ? "YES" : "NO" )  //var 2
+console.log(a + b + c > 2 * Math.max(a, b, c) ? 'YES' : 'NO')  //var 3
+
+
+
+
+/* TASK 18 Количество равных из трех
+Входные данные: Даны три целых числа, записанных в отдельных строках. Определите, сколько среди них совпадающих.
+Выходные данные: Программа должна вывести одно из чисел: 3 (если все совпадают), 2 (если два совпадают) или 0 (если все числа различны). */
+
+
+let a = prompt(); let b = prompt(); let c = prompt()
+a = +(a); b = +(b); c = +(c)
+
+console.log(a === b & b === c ? '3' : a === b || a === c || b === c ? '2' : '0')  //var 1
+console.log( ((a === b) + (b === c) + (c === a)) + (((a === b) + (b === c) + (c === a)) %  3) )  //var 2
+
+
+
+
+/* TASK 19 Тип треугольника. Определите тип треугольника (остроугольный, тупоугольный, прямоугольный) с данными сторонами.
+Входные данные: Даны три натуральных числа – стороны треугольника. Выходные данные: Необходимо вывести одно из слов: right для прямоугольного треугольника, 
+acute для остроугольного треугольника, obtuse для тупоугольного треугольника или impossible, если входные числа не образуют треугольника. */
+
+
+//var 1, самый первый вариант решения
+let [a, b, c] = [...Array(3)].map(prompt).map(Number)
+let max = Math.max(a, b, c)
+
+if (a + b > c & a+c>b & b+c>a) {
+    if (max > b & max > c) { //a
+        console.log(max*max > c*c + b*b ? 'obtuse' : max*max === c*c + b*b ? 'right' : max*max < c*c + b*b ? 'acute' : 'impossible')
+    }else if (max > c & max > a) { //b
+        console.log(max*max > a*a + c*c ? 'obtuse' : max*max === a*a + c*c ? 'right' : max*max < a*a + c*c ? 'acute' : 'impossible')
+    }else if (max > b & max > a) { //c
+        console.log(max*max > a*a + b*b ? 'obtuse' : max*max === a*a + b*b ? 'right' : max*max < a*a + b*b ? 'acute' : 'impossible')
+    }else if (a === b || a === c) {
+        console.log(a*a > b*b + c*c ?  'obtuse' : a*a === b*b + c*c ? 'right' : a*a < b*b + c*c ? 'acute' : 'impossible')
+    }else if (b === c) {
+        console.log(b*b > a*a + c*c ?  'obtuse' : b*b === a*a + c*c ? 'right' : b*b < a*a + c*c ? 'acute' : 'impossible')
+    }  
+
+}else 
+    console.log('impossible')
+
+
+//var 2
+let [a, b, c] = [...Array(3)].map(prompt).map(Number)
+let max = Math.max(a, b, c)
+
+if (a < b) [a, b] = [b, a]
+if (a < c) [a, c] = [c, a]
+
+console.log(a*a === c*c + b*b ? 'right' : a*a < c*c + b*b ? 'acute' : a < b + c ? 'obtuse' : 'impossible')
+
+
+
+
+/* TASK 20 Коровы
+По данному числу n закончите фразу "На лугу пасется..." одним из возможных продолжений: "n коров", "n корова", "n коровы", правильно склоняя слово "корова".
+Входные данные: Дано натуральное число n (n<100). Выходные данные: Программа должна вывести введенное число n и одно из слов (на латинице): 
+korov, korova или korovy, например, 1 korova, 2 korovy, 5 korov. Между числом и словом должен стоять ровно один пробел. */
+
+
+//var 1, подходит для чисел любого размера
+let n = Number(prompt()) + ''
+let answer = [[' korov'], [' korova'], [' korovy']]
+let a = n.slice(-1)
+let b = n.slice(-2, -1)
+let x = (a === '1' & b != '1') + 
+    ((a === '2' & b != '1'|| a === '3' & b != '1' || a === '4' & b != '1') * 2)
+
+console.log(n + answer[x])
+
+
+//var 2
+let n = Number(prompt())
+let ending = ''
+
+if (Math.floor(n / 10) !== 1) {
+    let mod = n % 10
+    if (mod === 1) {
+        ending = 'a'
+    } else if (mod < 5 && mod > 1) {
+        ending = 'y'
+    }
+}
+
+console.log(`${n} korov${ending}`)
+
+
+//var 3
+let n = +prompt() 
+let ones = n % 10
+let tens_not_1 = Math.floor(n / 10) % 10 != 1
+let suffix = (tens_not_1 && ones === 1) ? 'va' : (tens_not_1 && [2, 3, 4].includes(ones)) ? 'vy' : 'v'
+
+console.log(`${n} koro${suffix}`)
