@@ -1,0 +1,183 @@
+/* TASK 1 Сложная задача*
+Дано положительное натуральное число n. Напишите рекурсивную функцию, которая возвращает строку чисел от 1 до n, разделенных пробелом.
+Основная сложность задачи заключается в том, что ее необходимо решить с использованием рекурсии.
+
+Необходимо выполнить следующие условия:
+Написать функцию. Без ввода и вывода, только функцию.
+Убедиться, что задача решена с помощью рекурсии.
+Убедиться, что рекурсивный вызов сделан правильно: с уменьшающейся областью применения, без глобальных переменных.
+Ввод-вывод делать не нужно, это сделает проверяющая система.
+Sample Input 1: 5 Sample Output 1: 1 2 3 4 5 */
+
+
+function my_function(n) {
+    if (n <= 1) return n + ''
+    return my_function(n - 1 + " ") + n
+}
+
+
+
+
+/* TASK 2 В этом задании в нашу функцию testStr первым параметром передается строка (переменная str), а вторым - число (переменная n) . 
+Вам нужно вернуть из функции символ строки , порядковый номер которого указан в переданном в функцию числе.
+Sample Input: Veryyeladygirlthemgoodmemake 24 Sample Output: e */
+
+
+function testStr(str, n) {
+    return str.charAt(n-1)
+    // можно так: return str[n - 1]
+
+}
+
+let str = prompt()
+let n = Number(prompt())
+console.log(testStr(str, n))
+
+
+
+
+/* В этом задании в нашу функцию testArray передаются два массива случайной длины заполненные случайными числами. 
+Вам нужно сосчитать сумму всех элементов обоих массивов и возвратить ее из функции.
+Sample Input: [8, 1, 1, 7, 4, 0]  [5, 8, 5, 4, 8] Sample Output: 51 */
+
+
+//var 1
+function testArray(a, b) {
+    sum = a.reduce(function(a, b) {
+        return a + b
+    }, 0)
+    sum += b.reduce(function(a, b) {
+        return a + b
+    }, 0)
+    return sum
+}
+
+let [a, b] = prompt().split('  ').map(JSON.parse)
+console.log(testArray(a, b))
+
+
+//var 2
+function testArray(a, b) {
+  return [...a, ...b].reduce((sum, x) => sum + x, 0)
+//или так return a.concat(b).reduce((sum, x) => sum + x, 0)
+}
+
+let [a, b] = prompt().split('  ').map(JSON.parse)
+console.log(testArray(a, b))
+
+
+
+
+/* TASK 3 В этом задании в нашу функцию testArray передаются две строки случайной длины и содержания. Вам нужно составить из символов этих строк один массив 
+(каждый символ строки становится отдельным элементом массива), затем добавить первым элементом  массива текстовое значение "Иванов", и вернуть из функции
+все элементы в обратном порядке, преобразовав в строку. Обратите внимание, что в обратном порядке нужно переставить элементы внутри массива, а данные внутри 
+элементов инвертировать не нужно!
+Sample Input: 4326 297515 Sample Output: 5157926234Иванов */
+
+
+//var 1
+function testArray(a, b) {
+    a += b
+    let arr = [...a]
+    arr.unshift('Иванов')
+    return arr.reverse().join('')
+}
+
+let [a, b] = prompt().split(' ')
+console.log(testArray(a, b))
+
+
+//var 2
+function testArray(a, b) {
+  return ['Иванов', ...a + b].reverse().join('')
+}
+
+let [a, b] = prompt().split(' ')
+console.log(testArray(a, b))
+
+
+
+
+/* TASK 4 В этом задании в нашу функцию testDateTime передаются две строки вида "03 November 2017 04:17".
+Вам нужно превратить строки в даты, сравнить их. Для той, что больше получить день недели и вернуть его из функции.
+Название дня недели должно быть по-русски, с большой буквы, например: "Понедельник".
+Sample Input 1: 27 November 1909 20:32 22 September 1909 13:17
+Sample Output 1: Суббота */
+
+
+//var 1
+function testDateTime(a, b) {
+  let d1 = new Date(a)
+  let d2 = new Date(b)
+  var days = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота']
+  if (d1.getTime() >= d2.getTime()) {
+      return days[d1.getDay()]
+  }else
+      return days[d2.getDay()]
+}
+
+let a = prompt()
+let b = prompt()
+console.log(testDateTime(a, b))
+
+
+//var 2, покороче в написании
+function testDateTime(a, b) {
+  var days = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота']
+  if (new Date(a).getTime() >= new Date(b).getTime()) {
+      return days[new Date(a).getDay()]
+  }else
+      return days[new Date(b).getDay()]
+}
+
+let a = prompt()
+let b = prompt()
+console.log(testDateTime(a, b))
+
+
+/var 3, ещё короче и другой
+function testDateTime(a, b) {
+  [a, b] = [a, b].map(x => new Date(x))
+  let days = 'Воскресенье Понедельник Вторник Среда Четверг Пятница Суббота'.split(' ')
+  return days[(a > b ? a : b).getDay()]
+}
+
+let a = prompt()
+let b = prompt()
+console.log(testDateTime(a, b))
+
+
+
+
+/* TASK 5 В этом задании в нашу функцию передаются два параметра: целочисленная переменная ("а") и некоторая функция ("func"). 
+Вам необходимо запустить функцию "func", с переменной "а" в качестве аргумента. Но вот проблема - в функции, похоже, оказалась ошибка. 
+Вам нужно возвратить имя (свойство "name") возникающей ошибки. Sample Input: 9 Sample Output: EvalError */
+
+
+function testErrorFunc(a, func) {         
+    try {
+        func(a)
+    } catch(parampam) {
+        return parampam.name
+    }
+}
+
+
+
+
+/* TASK 6 В этом задании в нашу функцию testRegExp первым параметром передается случайная строка(переменная s), а вторым - случайная подстрока(переменная sub_s), 
+которую нужно использовать в качестве шаблона регулярного выражения. Вам нужно вернуть из функции строку, в которой будут перечислены через запятую все совпадения 
+шаблона с первой строкой. 
+Sample Input 1: Insoimpossibleaiderppearideranceconsiiderderidereiderdmiiderderr
+ider
+Sample Output 1:
+ider,ider,ider,ider,ider,ider */
+
+
+function testRegExp(s, sub_s) {
+    return s.match(new RegExp(sub_s, 'g')).join()
+}
+
+let s = prompt()
+let sub_s = prompt()
+console.log(testRegExp(s, sub_s))
