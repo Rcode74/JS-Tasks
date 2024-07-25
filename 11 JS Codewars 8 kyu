@@ -1,0 +1,121 @@
+/* TASK 1
+Цена без НДС
+Напишите функцию, которая вычисляет исходную цену без НДС. Если цена продукта равна 200, а НДС равен 15%, то окончательная цена (с НДС) составляет:200 + 15% = 230. 
+Таким образом, если ваша функция получает 230 в качестве входных данных, она должна вернуть200. 
+В этой задаче НДС равен 15%. Результат округляется до 2 десятичных знаков. Sample Input 1: 230 Sample Output 1: 200
+*/
+
+
+function excludingVatPrice(price) {
+    let number = (price / 1.15).toFixed(2) * 10 / 10
+    let length = number.toString().match(/\.(\d+)/)?.[1].length
+    length > 2 ? number = number.toFixed(2) : length = length
+    return number
+}
+const price = Number(prompt())
+console.log(excludingVatPrice(price))
+
+
+
+
+/* TASK 2
+Игры со словарем: Наполнитель заказа
+Вы запустили онлайн-бизнес, теперь большую часть вашего дня занимает выполнение заказов. По мере того, как ваш объем увеличивается, это отнимает у вас все больше времени.
+В последнее время вы сталкиваетесь с ситуациями, когда вы принимаете заказ, но не можете его выполнить. Вы решили написать функцию fillable(), которая принимает три аргумента: 
+словарь stock, представляющий товары на складе, строку, merch -- что клиент хочет купить, и целое число n количество единиц товара, которые хотят купить. 
+Функция должна вернут true, если товар в нужном количестве есть на складе, в противном случае нужно вернуть false.
+stock будет всегда корректный словарем, и n всегда >= 1.
+Sample Input 1:
+{"football":4,"boardgame":10,"leggos":1,"doll":5}
+football
+3
+Sample Output 1: true
+*/
+
+
+function fillable(stock, merch, n) {
+    return stock[merch] >= n
+}
+let stock = JSON.parse(prompt())
+let merch = prompt()
+let n = Number(prompt())
+console.log(fillable(stock, merch, n))
+
+
+
+
+/* TASK 3
+Загрязнение №1 -Строка-
+ИИ заразил текст одним единственным символом! Этот текст теперь полностью заполнен только этим символом. Напишите функцию contamination(text, char).
+Если text или char пусты, верните пустую строку. Примечание. Символ представляет собой строку длины 1 или пустую строку.
+Пример text before = "abc" character   = "z" text after  = "zzz"
+Sample Input 1: 
+abc
+z
+Sample Output 1: zzz
+*/
+
+
+function contamination(text, char) {
+    z = text.length
+    x = ''
+    while(z){
+        x += char[0]
+        z --
+    }
+    return char === '' ? ' ' : x
+}
+const text = prompt()
+const char = prompt()
+console.log(contamination(text, char))
+
+
+
+
+/* TASK 4
+Ради забавы #261: Чей ход
+Задача
+Играют два игрока "black" и "white". Игра состоит из нескольких раундов. Если игрок выигрывает в раунде, он ходит в следующем раунде. 
+Если игрок проигрывает раунд, ход переходит другому игроку. Учитывая, чья очередь была в предыдущем раунде и выиграл ли он, определите, чья очередь будет в следующем раунде.
+Ввод, вывод
+lastPlayer принимает значение "black" или "white" -- тот, чей был ход в предыдущем раунде.
+win будет true если выиграл игрок lastPlayer, сделавший ход в предыдущем раунде, и falseпротивном случае.
+Вернуть, "white", если в следующем раунде ходят белые, и "black" в противном случае.
+Пример
+Для lastPlayer = "black" и win = false вывести "white".
+Для lastPlayer = "white" и win = true вывести "white".
+Sample Input 1: black false Sample Output 1: white
+*/
+
+
+function whoseMove(lastPlayer, win) {
+    let player = ['white', 'black']
+    let x
+    if (win === true){
+        lastPlayer === player[0] ? x = player[0] : x = player[1]
+    }else
+        lastPlayer === player[0] ? x = player[1] : x = player[0]
+    return x
+}
+let lastPlayer = prompt()
+let win = prompt() === 'true'
+console.log(whoseMove(lastPlayer, win))
+
+
+
+
+/* TASK 5
+Круги в многоугольниках
+Вы владелец компании по производству коробок.
+Ваша компания может изготовить любой многоугольный ящик с равными сторонами, но многие ваши клиенты хотят перевозить круглые объекты в этих коробках. 
+Круги -- очень распространенная форма в легкой промышленности. Жестяные банки, стаканы, шины и компакт-диски -- вот лишь несколько примеров.
+Вы решаете добавить в коробки следующую информацию: Самый большой (диаметр) круглый объект, который может поместиться в данную коробку.
+Sample Input 2: 8 9 Sample Output 2: 21.728
+*/
+
+
+function circleDiameter(sides, sideLength) {
+    return +(sideLength / Math.tan(Math.PI / sides)).toFixed(3)
+}
+let [sides, sideLength] = prompt().split(' ').map(Number)
+console.log(circleDiameter(sides, sideLength))
