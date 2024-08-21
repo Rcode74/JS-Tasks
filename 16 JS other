@@ -1,0 +1,271 @@
+/* TASK 1
+Минимум и максимум из трех чисел
+Напишите программу, которая выбирает максимальное и минимальное из трёх введённых чисел.
+Входные данные: Входная строка содержит три целых числа, разделённых пробелами.
+Выходные данные: В первой строке нужно вывести минимальное из введённых чисел, во второй строке – максимальное.
+*/
+
+
+let [a, b, c] = prompt().split(' ').map(Number)
+if (a > b) { a^=b, b^=a, a^=b}
+if (a > c) { a^=c, c^=a, a^=c}
+if (b > c) { c^=b, b^=c, c^=b}
+console.log(`${a}\n${c}`)
+
+
+
+
+/* TASK 2
+Минимум и максимум из 5 чисел
+Напишите программу, которая выбирает максимальное и минимальное из пяти введённых чисел.
+Входные данные: Входная строка содержит 5 целых чисел, разделённых пробелами.
+Выходные данные: В первой строке нужно вывести минимальное из введённых чисел, во второй строке – максимальное.
+*/
+
+
+let N = prompt().split(' ').map(Number)
+let min = N[0]
+let max = N[4]
+
+for(let i = 1; i < 5; i++) {
+    if (min > N[i]) {min = N[i]}
+}
+for(let i = 4; i >= 0; i--) {
+    if (max < N[i]) {max = N[i]}
+}
+
+console.log(`${min}\n${max}`)
+
+
+
+
+/* TASK 3
+Кто старше?
+Программа принимает три числа: возраст Антона, возраст Бориса и возраст Виктора. Определите, кто из них старше остальных.
+Входные данные: Входная строка содержит три натуральных числа: возраст Антона, возраст Бориса и возраст Виктора.
+Выходные данные: Выходная строка должна содержать латинскую букву – код того человека, который старше всех. Код Антона – 'A', код Бориса – 'B', код Виктора – 'C'.
+Если двое старше третьего, нужно вывести два кода через пробел (в алфавитном порядке). Например, если Антон и Виктор старше Бориса, программа должна вывести 'A C'.
+Если все трое одного возраста, программа должна вывести число 0.
+*/
+
+
+let [A, B, C] = [...Array(3)].map(prompt).map(Number)
+let x = 0
+if (A === B && A === C) { x = 0 }
+A > B && A > C ? x = 'A' : x
+B > A && B > C ? x = 'B' : x
+C > A && C > B ? x = 'C' : x
+A === B && A > C ? x = 'A B' : x
+A === C && A > B ? x = 'A C' : x
+B === C && B > A ? x = 'B C' : x
+console.log(x)
+
+
+
+
+/* TASK 4
+Яша плавал в бассейне размером N × M  метров и устал. В этот момент он обнаружил, что находится на расстоянии x метров от одного из длинных бортиков (не обязательно от ближайшего) 
+и y метров от одного из коротких бортиков. Какое минимальное расстояние должен проплыть Яша, чтобы выбраться из бассейна на бортик?
+Входные данные: Вводятся 4 натуральных числа: N, M, x, y (N ≠ M). Все числа не превосходят 100.
+Выходные данные: Требуется вывести одно число – минимальное расстояние, которое должен проплыть Яша, чтобы выбраться на бортик.
+*/
+
+
+let [N, M, x, y] = [...Array(4)].map(prompt).map(Number)
+let long = Math.max(N, M)
+let short = Math.min(N, M)
+let otherShort = short - x
+let otherLong = long - y
+console.log(Math.min(x, y, otherShort, otherLong))
+
+
+
+
+/* TASK 5
+Периметр суши
+Даны таблица, описывающая острова. Найдите общий периметр всей суши. Участок земли обозначен X, водные поля обозначены ..
+https://www.codewars.com/kata/5839c48f0cf94640a20001d3
+https://leetcode.com/problems/island-perimeter
+*/
+
+
+let N = Number(prompt())
+let arr = [...Array(N)].map(prompt)
+let perimeter = 0
+
+for(let i = 0; i <= N - 1; i++) {               // по строчкам 
+    for(let t = 0; t <= arr[i].length - 1; t++) {        // в строчке
+        if (arr[i][t] === 'X') {
+            
+            if (i > 0) {
+                if (arr[i-1][t] !== 'X') perimeter ++ 
+            }else perimeter ++
+            
+            if (i < N - 1) {
+                if (arr[i+1][t] !== 'X') perimeter ++ 
+            }else perimeter ++
+            
+            if (t > 0) {
+                if (arr[i][t-1] !== 'X') perimeter ++ 
+            }else perimeter ++
+            
+            if (t < arr[i].length - 1) {
+                if (arr[i][t+1] !== 'X') perimeter ++
+            }else perimeter ++
+        }
+    }
+} 
+console.log(perimeter)
+
+
+
+
+/* TASK 6
+Достижима ли ячейка за ограниченное время
+Вам даны четыре целых числа sx, sy, fx, fy и неотрицательное целое число t. В бесконечной двумерной сетке вы начинаете с ячейки (sx, sy). 
+Каждую секунду вы должны перемещаться в любую из соседних ячеек. Вернитесь true , если вы сможете добраться до ячейки (fx, fy) ровно за t  секунд , или false в противном случае.
+Соседними ячейками ячейки являются 8 ячеек вокруг нее, которые имеют с ней хотя бы один общий угол. Вы можете посетить одну и ту же ячейку несколько раз.
+Пример: Ввод: sx = 2, sy = 4, fx = 7, fy = 7, t = 6. Вывод: true. 
+Объяснение: Начиная с ячейки (2, 4), мы можем добраться до ячейки (7, 7) ровно за 6 секунд, пройдя через ячейки, изображенные на картинке.
+*/
+
+
+var isReachableAtTime = function(sx, sy, fx, fy, t) {
+    let startX = Math.min(sx, fx)
+    let startY = Math.min(sy, fy)
+    let directX = Math.max(sx, fx)
+    let directY = Math.max(sy, fy)
+    let step = 0
+    
+    if (t === 0) return false
+    if (sx === fx && sy === fy) {
+        return t < 2 ? false : true
+    } 
+    
+    while(t > step || startX !== directX && startY !== directY){
+        if (startX < directX && startY < directY) {
+            startX ++; startY ++; step ++
+        }
+        if (startX === directX && startY === directY) {
+            break
+        }
+        if (startY === directY) {
+            startX ++; step ++
+        }
+        if (startX === directX && startY === directY) {
+            break
+        }
+        if (startX === directX) {
+            startY ++; step ++
+        }
+    }
+    
+    return t >= step && startX === directX && startY === directY ? true : false
+}
+
+const [sx, sy, fx, fy, t] = prompt().split(' ').map(Number)
+console.log(isReachableAtTime(sx, sy, fx, fy, t))
+
+
+//better var
+var isReachableAtTime = function(sx, sy, fx, fy, t) {
+    if (sx === fx && sy === fy) { return t != 1 }
+    let dx = Math.abs(sx - fx)
+    let dy = Math.abs(sy - fy)
+    return (Math.abs(dx - dy) <= t - Math.min(dx, dy))
+}
+
+const [sx, sy, fx, fy, t] = prompt().split(' ').map(Number)
+console.log(isReachableAtTime(sx, sy, fx, fy, t))
+
+
+/* TASK 7 
+Алгоритм Ракерпак
+Дано число n, в десятичной записи которого три или больше различных цифр. Выполните следующий алгоритм семь раз:
+Расположите цифры этого числа в порядке неубывания, это будет число A.
+Расположите цифры этого числа в порядке невозрастания, это будет число B.
+Выполните предыдущие шаги с числом (B - A).
+Выведите последнюю разность (B - A).
+*/
+
+
+let n = Number(prompt())
+function rakerpack(n) {
+    let a = (n + '').split('').sort().join('')
+    let b = a.split('').reverse().join('')
+    return b-a
+}
+
+for (let i = 7; i > 0; i--) {
+    n = rakerpack(n);
+}
+console.log(n)
+
+//Капрекара
+//const n = Number(prompt()) 
+//console.log(n < 999 ? 495 : 6174)
+
+
+/* TASK 8
+Удалить из строки все последовательные повторяющиеся слова, оставив только первые вхождения.
+Sample Input: alpha beta beta gamma gamma gamma delta alpha beta beta gamma gamma gamma delta
+Sample Output: alpha beta gamma delta alpha beta gamma delta
+*/
+
+
+let s = prompt().split(' ')
+
+const removeConsecutiveDuplicates = s => {
+    return s.filter((item, index) => {
+        return index === 0 || item != s[index-1]
+    }).join(' ')
+}
+
+console.log(removeConsecutiveDuplicates(s))
+
+
+
+
+/* TASK 9
+Возраст в днях
+Вы когда-нибудь хотели узнать, сколько вам дней? Завершите функцию, которая возвращает ваш возраст в днях. День рождения дается в следующем порядке: year, month, day.
+Например, если сегодня 30 ноября 2015 года, то ageInDays(2015, 11, 1) returns "You are 29 days old" Ожидается, что день рождения будет в прошлом.
+*/
+
+
+function ageInDays(year, month, day){
+    let toDay = new Date()
+    let brDay = new Date(year, month-1, day)
+    let lfDay = Math.round((toDay.getTime() - brDay.getTime()) / 86400000)
+    return `You are ${lfDay} days old`
+}
+let [year, month, day] = prompt().split(' ').map(Number)
+console.log(ageInDays(year, month, day))
+
+
+
+
+/* TASK 10 Code Golf
+Верхний или нижний регистр?
+Напишите функцию f, которая определяет является ли латинская буква в верхнем регистре или нет. 
+Функция должна вернуть true, если это одна из букв A-Z или вернуть false, если это буква a-z. Код должен быть не длиннее 12 (двенадцати) символов.
+Взято с Codewars, в оригинале нужно поместиться в 9 символов.
+*/
+
+
+f=s=>s<'a'
+
+
+
+
+/* TASK 11 Code Golf
+Есть ли нечетный бит?* (непростая задача) Вернуть 1, если хоть один нечетный бит числа x равен 1. Иначе вернуть 0. x -- натуральное число меньше 2 в 31 степени. 
+Нумерация бит начинается справа с нуля, то есть младший бит, самый правый, имеет позицию 0 (чётная).
+Примеры
+  2  -->  1 (true) первый нечетный бит равен 1 (2 = двоичное представление "10")
+  5  -->  0 (false) нет ни одного нечетного бита с 1 (5 = двоичное представление "101")
+170  -->  1 (true) все нечетные биты равны 1 (170 = двоичное представление "10101010")
+Код должен быть не длиннее 23 (двадцати трех) символов.
+
+
+f=x=>x&0xAAAAAAAA?1:0
